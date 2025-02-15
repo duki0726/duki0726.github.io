@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+            background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+            overflow: hidden;
+        }
+        h1 {
+            color: #ff4d4d;
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff4d4d;
+            color: white;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            background-color: #ff1a1a;
+            transform: scale(1.1);
+        }
+        .heart, .sad-face {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            animation: float 3s infinite;
+        }
+        .heart {
+            background-color: #ff4d4d;
+            transform: rotate(45deg);
+        }
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #ff4d4d;
+            border-radius: 50%;
+        }
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+        .heart:after {
+            left: 15px;
+            top: 0;
+        }
+        .sad-face {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Sad_face.svg/1200px-Sad_face.svg.png');
+            background-size: cover;
+            width: 30px;
+            height: 30px;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <h1>¿Quieres ser mi San Valentín?</h1>
+    <button id="yesButton">Sí</button>
+    <button id="noButton">No</button>
+
+    <script>
+        document.getElementById('yesButton').onclick = function() {
+            Swal.fire({
+                title: '¡Genial!',
+                text: 'Te quiero',
+                icon: 'success',
+                confirmButtonText: '¡Y yo a ti!'
+            });
+            createHearts(5); // Crea 5 corazones
+        };
+
+        document.getElementById('noButton').onclick = function() {
+            Swal.fire({
+                title: '¡Oh no!',
+                text: 'Gracias, bonito día ;(',
+                icon: 'error',
+                confirmButtonText: 'Está bien'
+            });
+            createSadFaces(5); // Crea 5 caras tristes
+        };
+
+        function createHearts(count) {
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                document.body.appendChild(heart);
+                heart.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+                heart.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+        }
+
+        function createSadFaces(count) {
+            for (let i = 0; i < count; i++) {
+                const sadFace = document.createElement('div');
+                sadFace.className = 'sad-face';
+                document.body.appendChild(sadFace);
+                sadFace.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+                sadFace.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+                setTimeout(() => {
+                    sadFace.remove();
+                }, 3000);
+            }
+        }
+    </script>
+
+</body>
+</html>
